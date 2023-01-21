@@ -143,7 +143,18 @@ CREATE TABLE characters (
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
--- TODO!
+
+INSERT INTO movies (
+    title,
+    released_at,
+    mpaa_rating,
+    studio_name
+) VALUES (
+    "Batman Begins",
+    "2005",
+    "PG-13",
+    "Warner Bros"
+) V
 
 -- Prints a header for the movies output
 .print "Movies"
