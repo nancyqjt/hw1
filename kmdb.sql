@@ -103,8 +103,8 @@
 DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS actors;
 DROP TABLE IF EXISTS studios;
-DROP TABLE IF EXISTS casts;
 DROP TABLE IF EXISTS characters;
+DROP TABLE IF EXISTS casts;
 
 -- Create new tables, according to your domain model
 CREATE TABLE movies (
@@ -130,16 +130,17 @@ CREATE TABLE studios (
   studio_name TEXT
 );
 
-CREATE TABLE casts (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  movie_id INTEGER
-);
-
 CREATE TABLE characters (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   character_name TEXT,
+  movie_id INTEGER,
   cast_id INTEGER,
-  actor_id INTEGER,
+  actor_id INTEGER
+  );
+
+CREATE TABLE casts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  movie_id INTEGER
 );
 
 -- Insert data into your database that reflects the sample data shown above
@@ -236,7 +237,7 @@ FROM movies;
 
 -- The SQL statement for the cast output
 
-SELECT title, first_name, last_name, character_name 
+SELECT title, first_name, last_name, character_name
 FROM movies
-INNER JOIN actors ON movies.id = actors.movie_id
+INNER JOIN actors ON movies.id = actors.movie_id;
 INNER JOIN characters ON movies.cast_id = characters.cast_id;
