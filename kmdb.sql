@@ -112,6 +112,7 @@ CREATE TABLE movies (
   title TEXT,
   released_at INTEGER,
   mpaa_rating TEXT,
+  studio_name TEXT,
   studio_id INTEGER,
   cast_id INTEGER
 );
