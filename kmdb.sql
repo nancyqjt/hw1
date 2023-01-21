@@ -154,7 +154,35 @@ INSERT INTO movies (
     "2005",
     "PG-13",
     "Warner Bros"
-) V
+), (
+  "The Dark Knight",
+  "2008",
+  "PG-13",
+  "Warner Bros"
+),(
+  "The Dark Knight Rises",
+  "2012",
+  "PG-13",
+  "Warner Bros"
+);
+
+INSERT INTO characters (
+    character_name
+) VALUES ("Bruce Wayne"), 
+("Alfred"),
+("Ra's Al Ghul"),
+("Rachel Dawes"),
+("Commissioner Gordon"),
+("Joker"),
+("Harvey Dent"),
+("Bane"),
+("John Blake"),
+("Selina Kyle");
+
+INSERT INTO actors (
+  first_name,
+  last_name
+) VALUES
 
 -- Prints a header for the movies output
 .print "Movies"
