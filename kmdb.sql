@@ -237,7 +237,9 @@ FROM movies;
 
 -- The SQL statement for the cast output
 
-SELECT title, first_name, last_name, character_name
+SELECT title, first_name, last_name
+--, character_name
 FROM movies
-INNER JOIN actors ON movies.id = actors.movie_id;
-INNER JOIN characters ON movies.id = characters.movie_id;
+INNER JOIN actors ON actors.movie_id = movies.id
+GROUP BY title;
+--INNER JOIN characters ON movies.id = characters.movie_id;
