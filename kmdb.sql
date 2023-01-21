@@ -182,7 +182,40 @@ INSERT INTO characters (
 INSERT INTO actors (
   first_name,
   last_name
-) VALUES
+) VALUES (
+  "Christian",
+  "Bale"
+), (
+  "Michael",
+  "Caine"
+), (
+  "Liam",
+  "Neeson"
+), (
+  "Katie",
+  "Holmes"
+), (
+  "Gary",
+  "Oldman"
+), (
+  "Heath",
+  "Ledger"
+), (
+  "Aaron",
+  "Eckhart"
+), (
+  "Maggie",
+  "Gyllenhaal"
+), (
+  "Tom",
+  "Hardy"
+), (
+  "Joseph",
+  "Gordon-Levitt"
+), (
+  "Anne",
+  "Hathaway"
+);
 
 -- Prints a header for the movies output
 .print "Movies"
