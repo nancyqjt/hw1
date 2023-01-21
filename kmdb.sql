@@ -223,7 +223,9 @@ INSERT INTO actors (
 .print ""
 
 -- The SQL statement for the movies output
--- TODO!
+
+SELECT title, released_at, mpaa_rating, studio_name 
+FROM movies;
 
 -- Prints a header for the cast output
 .print ""
@@ -231,6 +233,9 @@ INSERT INTO actors (
 .print "========"
 .print ""
 
-
 -- The SQL statement for the cast output
--- TODO!
+
+SELECT title, first_name, last_name, character_name 
+FROM movies
+INNER JOIN actors ON movies.id = actors.movie_id
+INNER JOIN characters ON movies.cast_id = characters.cast_id;
