@@ -104,7 +104,6 @@ DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS actors;
 DROP TABLE IF EXISTS studios;
 DROP TABLE IF EXISTS characters;
-DROP TABLE IF EXISTS casts;
 
 -- Create new tables, according to your domain model
 CREATE TABLE movies (
@@ -112,17 +111,7 @@ CREATE TABLE movies (
   title TEXT,
   released_at INTEGER,
   mpaa_rating TEXT,
-  studio_name TEXT,
-  studio_id INTEGER,
-  cast_id INTEGER
-);
-
-CREATE TABLE actors (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  first_name TEXT,
-  last_name TEXT,
-  movie_id INTEGER,
-  cast_id INTEGER
+  studio_id INTEGER
 );
 
 CREATE TABLE studios (
@@ -130,56 +119,49 @@ CREATE TABLE studios (
   studio_name TEXT
 );
 
+CREATE TABLE actors (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  first_name TEXT,
+  last_name TEXT
+);
+
 CREATE TABLE characters (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   character_name TEXT,
   movie_id INTEGER,
-  cast_id INTEGER,
   actor_id INTEGER
   );
 
-CREATE TABLE casts (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  movie_id INTEGER
-);
-
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
+
+INSERT INTO studios (
+  studio_name
+) VALUES (
+  "Warner Bros"
+);
 
 INSERT INTO movies (
     title,
     released_at,
     mpaa_rating,
-    studio_name
+    studio_id
 ) VALUES (
     "Batman Begins",
     "2005",
     "PG-13",
-    "Warner Bros"
+    1
 ), (
   "The Dark Knight",
   "2008",
   "PG-13",
-  "Warner Bros"
+  1
 ),(
   "The Dark Knight Rises",
   "2012",
   "PG-13",
-  "Warner Bros"
+  1
 );
-
-INSERT INTO characters (
-    character_name
-) VALUES ("Bruce Wayne"), 
-("Alfred"),
-("Ra's Al Ghul"),
-("Rachel Dawes"),
-("Commissioner Gordon"),
-("Joker"),
-("Harvey Dent"),
-("Bane"),
-("John Blake"),
-("Selina Kyle");
 
 INSERT INTO actors (
   first_name,
@@ -219,6 +201,24 @@ INSERT INTO actors (
   "Hathaway"
 );
 
+INSERT INTO characters (
+    character_name, movie_id, actor_id
+) VALUES ("Bruce Wayne", 1, 1), 
+("Alfred", 1, 2),
+("Ra's Al Ghul", 1, 3),
+("Rachel Dawes", 1, 4),
+("Commissioner Gordon", 1, 5),
+("Bruce Wayne", 2, 1), 
+("Joker", 2, 6),
+("Harvey Dent", 2, 7),
+("Alfred", 2, 2),
+("Rachel Dawes", 2, 8),
+("Bruce Wayne", 3, 1),
+("Commissioner Gordon", 3, 5),
+("Bane", 3, 9),
+("John Blake", 3, 10),
+("Selina Kyle", 3, 11);
+
 -- Prints a header for the movies output
 .print "Movies"
 .print "======"
@@ -226,8 +226,9 @@ INSERT INTO actors (
 
 -- The SQL statement for the movies output
 
-SELECT title, released_at, mpaa_rating, studio_name 
-FROM movies;
+SELECT movies.title, movies.released_at, movies.mpaa_rating, studios.studio_name 
+FROM movies
+INNER JOIN studios ON movies.studio_id = studios.id;
 
 -- Prints a header for the cast output
 .print ""
@@ -237,9 +238,8 @@ FROM movies;
 
 -- The SQL statement for the cast output
 
-SELECT title, first_name, last_name
---, character_name
+SELECT movies.title, actors.first_name, actors.last_name, 
+characters.character_name
 FROM movies
-INNER JOIN actors ON actors.movie_id = movies.id
-GROUP BY title;
---INNER JOIN characters ON movies.id = characters.movie_id;
+INNER JOIN characters ON movies.id = characters.movie_id
+INNER JOIN actors ON actors.id = characters.actor_id;
